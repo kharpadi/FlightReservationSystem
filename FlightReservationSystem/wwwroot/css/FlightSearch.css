@@ -1,0 +1,29 @@
+﻿/* FlightSearch.css */
+
+body {
+    background-color: #ecf0f1;
+}
+
+.container {
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 50px auto;
+}
+
+.form-row {
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    width: 100%;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+    .btn-primary:hover {
+        background-color: #c82333;
+        border-color: #c82333;
+    }

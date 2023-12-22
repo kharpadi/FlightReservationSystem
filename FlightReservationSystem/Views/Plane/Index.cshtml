@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Plane>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/UserList.css" asp-append-version="true" />
+</head>
+
+<div class="container mt-5">
+    <h2>Plane List</h2>
+
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Total Seat</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var plane in Model)
+            {
+                <tr>
+                    <td>@plane.Name</td>
+                    <td>@plane.Type</td>
+                    <td>@plane.TotalSeat</td>
+                    <td>
+                        <a asp-controller="Plane" asp-action="Update" asp-route-id="@plane.Id" class="btn-update">Update</a>
+                        <a asp-controller="Plane" asp-action="Delete" asp-route-id="@plane.Id" class="btn-delete">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="add-user-section">
+        <a asp-controller="Plane" asp-action="Create" class="btn-add-user">Create Plane</a>
+    </div>
+</div>

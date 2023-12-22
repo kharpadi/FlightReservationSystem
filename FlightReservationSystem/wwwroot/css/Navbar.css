@@ -1,0 +1,41 @@
+﻿/* custom.css */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #3498db;
+    color: white;
+    padding: 1rem 0;
+}
+
+    .navbar a {
+        color: white !important;
+    }
+
+.navbar-toggler-icon {
+    color: white;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.footer {
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+    .footer a {
+        color: #ecf0f1;
+    }
+
+        .footer a:hover {
+            color: #3498db;
+            text-decoration: none;
+        }

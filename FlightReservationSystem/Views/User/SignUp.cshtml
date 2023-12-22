@@ -1,0 +1,34 @@
+﻿@model User
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" asp-action="SignUp">
+    <link rel="stylesheet" href="~/css/CreateUser.css" asp-append-version="true" />
+    <div class="container mt-5">
+        <h2>Sign Up</h2>
+            <div class="form-group">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" type="text" class="form-control" id="inputName" placeholder="Enter your name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname">Surname</label>
+                <input asp-for="Surname" type="text" class="form-control" id="inputSurname" placeholder="Enter your surname">
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email">Email address</label>
+                <input asp-for="Email" type="email" class="form-control" id="inputEmail" placeholder="Enter your email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" type="password" class="form-control" id="inputPassword" placeholder="Enter your password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="role" value="User" />
+            <button type="submit" class="btn btn-primary">Sign up</button>
+            <a asp-controller="User" asp-action="Index" class="btn btn-secondary">List</a>
+    </div>
+</form>

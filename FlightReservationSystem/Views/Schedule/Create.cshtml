@@ -1,0 +1,44 @@
+﻿@model Schedule
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form method="post">
+    <head>
+        <link rel="stylesheet" href="~/css/SignUp.css" asp-append-version="true" />
+    </head>
+    <div class="container mt-5">
+        <h2>Create Schedule</h2>
+        <form>
+            <div class="form-group">
+                <label asp-for="PlaneId">Select Plane:</label>
+                <select asp-for="PlaneId" class="form-control">
+                <option value="">--Select--</option>
+                @foreach(var plane in ViewBag.PlaneList)
+                {
+                    <option value="@plane.Id">@plane.Name</option>
+                }
+                </select>
+                <span asp-validation-for="PlaneId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RouteId">Select Route:</label>
+                <select asp-for="RouteId" class="form-control">
+                <option value="">--Select--</option>
+                @foreach (var route in ViewBag.RouteList)
+                {
+                    <option value="@route.Id">@route.DepartureCity - @route.ArrivalCity</option>
+                }
+                </select>
+                <span asp-validation-for="RouteId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DepartureTime">Departure Time:</label>
+                <input asp-for="DepartureTime" type="datetime-local" class="form-control" min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                <span asp-validation-for="DepartureTime" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+            <a asp-controller="Schedule" asp-action="Index" class="btn btn-secondary btn-lg">Back to the List</a>
+        </form>
+    </div>
+</form>

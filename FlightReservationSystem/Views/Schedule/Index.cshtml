@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Schedule>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/UserList.css" asp-append-version="true" />
+</head>
+
+<div class="container mt-5">
+    <h2>Schedule List</h2>
+
+    <table class="user-table">
+        <thead>
+            <tr>
+                <th>Plane</th>
+                <th>Route</th>
+                <th>Departure Time</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var schedule in Model)
+            {
+                <tr>
+                    <td>@schedule.Plane.Name</td>
+                    <td>@schedule.Route.DepartureCity - @schedule.Route.ArrivalCity</td>
+                    <td>@schedule.DepartureTime</td>
+                    <td>
+                        <a asp-controller="Schedule" asp-action="Update" asp-route-id="@schedule.Id" class="btn-update">Update</a>
+                        <a asp-controller="Schedule" asp-action="Delete" asp-route-id="@schedule.Id" class="btn-delete">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="add-user-section">
+        <a asp-controller="Schedule" asp-action="Create" class="btn-add-user">Create Schedule</a>
+    </div>
+</div>

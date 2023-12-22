@@ -1,0 +1,44 @@
+﻿@model User
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<form method="post" asp-action="Update">
+    <head>
+        <link rel="stylesheet" href="~/css/CreateUser.css" asp-append-version="true" />
+    </head>
+    <div class="container mt-5">
+        <h2>Update User</h2>
+        <form>
+            <div class="form-group">
+                <label asp-for="Name">Name</label>
+                <input asp-for="Name" type="text" class="form-control" id="inputName" placeholder="Enter your name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname">Surname</label>
+                <input asp-for="Surname" type="text" class="form-control" id="inputSurname" placeholder="Enter your surname">
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email">Email address</label>
+                <input asp-for="Email" type="email" class="form-control" id="inputEmail" placeholder="Enter your email">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" type="password" class="form-control" id="inputPassword" placeholder="Enter your password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="role">Role:</label>
+                <select asp-for="role" class="form-control" id="Role" name="Role" required>
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                </select>
+                <button type="submit" class="btn btn-primary btn-lg">Update</button>
+            </div>
+            <a asp-controller="User" asp-action="Index" class="btn btn-secondary btn-lg">Back to the List</a>
+        </form>
+    </div>
+
+</form>
