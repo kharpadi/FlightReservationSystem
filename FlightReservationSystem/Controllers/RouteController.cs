@@ -70,7 +70,7 @@ namespace FlightReservationSystem.Controllers
             {
                 _context.routes.Update(updatedRoute);
                 _context.SaveChanges();
-                return RedirectToAction("Index", "Route");
+                return RedirectToAction("Index", "Ronute");
             }
             return View(updatedRoute);
         }
@@ -82,7 +82,7 @@ namespace FlightReservationSystem.Controllers
             {
                 NotFound();
             }
-            _context.Remove(existingRoute);
+            _context.routes.Remove(existingRoute);
             _context.SaveChanges();
             return RedirectToAction("Index", "Route");
         }

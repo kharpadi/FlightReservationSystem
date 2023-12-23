@@ -65,7 +65,7 @@ namespace FlightReservationSystem.Controllers
             {
                 return NotFound();
             }
-            var ScheduleFromDb = _context.schedules.Find(Id);
+            var ScheduleFromDb = _context.schedules.Include(r=>r.Route).Include(p=>p.Plane);
             if (ScheduleFromDb == null)
             {
                 return NotFound();
@@ -76,13 +76,41 @@ namespace FlightReservationSystem.Controllers
         [HttpPost]
         public IActionResult Update(Schedule updatedSchedule)
         {
+            // Plane verilerini al ve ViewBag'e ekle
+            ViewBag.PlaneList = _context.planes.ToList();
+
+            // Route verilerini al ve ViewBag'e ekle
+            ViewBag.RouteList = _context.routes.ToList();
+            var isExisting = _context.schedules.FirstOrDefault(s => s.Route == updatedSchedule.Route);
+            if (isExisting != null && isExisting.DepartureTime == updatedSchedule.DepartureTime)
+            {
+                ModelState.AddModelError("Schedule", "There cannot be more than one flight to the same route at the same time");
+                return View(updatedSchedule);
+            }
+            var existingPlane = _context.schedules.FirstOrDefault(s => s.Plane == updatedSchedule.Plane);
+            if (existingPlane != null && existingPlane.DepartureTime == updatedSchedule.DepartureTime)
+            {
+                ModelState.AddModelError("Plane", "A plane cannot make more than one flight at the same time");
+                return View(updatedSchedule);
+            }
             if (ModelState.IsValid)
             {
-                _context.routes.Update(updatedSchedule);
+                _context.schedules.Update(updatedSchedule);
                 _context.SaveChanges();
-                return RedirectToAction("Index", "Route");
+                return RedirectToAction("Index", "Schedule");
             }
-            return View(updatedRoute);
+            return View(updatedSchedule);
+        }
+        public IActionResult Delete(int? Id)
+        {
+            var existingSchedule = _context.schedules.Find(Id);
+            if (existingSchedule == null)
+            {
+                NotFound();
+            }
+            _context.schedules.Remove(existingSchedule);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Schedule");
         }
     }
 }

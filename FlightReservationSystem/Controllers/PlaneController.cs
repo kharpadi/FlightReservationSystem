@@ -64,7 +64,7 @@ namespace FlightReservationSystem.Controllers
             {
                 NotFound();
             }
-            _context.Remove(existingPlane);
+            _context.planes.Remove(existingPlane);
             _context.SaveChanges();
             return RedirectToAction("Index", "Plane");
         }

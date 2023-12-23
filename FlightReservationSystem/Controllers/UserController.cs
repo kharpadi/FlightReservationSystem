@@ -116,9 +116,10 @@ namespace FlightReservationSystem.Controllers
                     return View("Update", updatedUser);
                 }
             }
+                existingUser = updatedUser;
             if (ModelState.IsValid)
             {
-                _context.Update(updatedUser);
+                _context.users.Update(existingUser);
                 _context.SaveChanges();
                 return RedirectToAction("Index", "User");
             }
@@ -132,7 +133,7 @@ namespace FlightReservationSystem.Controllers
             {
                 NotFound();
             }
-            _context.Remove(existingUser);
+            _context.users.Remove(existingUser);
             _context.SaveChanges();
             return RedirectToAction("Index","User");
         }
