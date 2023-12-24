@@ -21,7 +21,7 @@ namespace FlightReservationSystem.Controllers
         public IActionResult Create()
         {
             
-            // Plane verilerini al ve ViewBag'e ekle
+            // Plane verilerini al ve ViewBag'e ekle.
             ViewBag.PlaneList= _context.planes.ToList();
 
             // Route verilerini al ve ViewBag'e ekle
