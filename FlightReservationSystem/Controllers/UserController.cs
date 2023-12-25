@@ -1,6 +1,7 @@
 ﻿using FlightReservationSystem.Data;
 using FlightReservationSystem.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FlightReservationSystem.Controllers
 {
@@ -8,15 +9,33 @@ namespace FlightReservationSystem.Controllers
     {
         private readonly ApplicationDbContext _context;
 
-        public UserController(ApplicationDbContext context)
+        public UserController(ApplicationDbContext context)//
         {
             _context = context;
         }
 
-        public IActionResult Home()
+        public IActionResult SearchFlights()
         {
             return View();
         }
+
+        [HttpPost]
+        public IActionResult SearchFlights(string DepartureCity, string ArrivalCity, DateTime SelectedDate)
+        {
+            // Seçilen tarihte ve şehirlerde olan uçuşları filtrele
+            var flights = _context.schedules
+                .Include(s => s.Route)
+                .Where(s =>
+                    s.Route.DepartureCity == DepartureCity &&
+                    s.Route.ArrivalCity == ArrivalCity &&
+                    s.DepartureTime.Date <= SelectedDate.Date).OrderBy(s => s.DepartureTime)
+                .ToList();
+                ViewBag.DepartureCity=DepartureCity;
+                ViewBag.ArrivalCity=ArrivalCity;
+
+            return View(flights);
+        }
+
 
         public IActionResult SignIn()
         {

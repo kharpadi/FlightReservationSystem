@@ -1,0 +1,40 @@
+﻿<form asp-controller="User" asp-action="SearchFlights" method="post">
+    <label>Kalkış Şehri:</label>
+    <input type="text" name="DepartureCity" required />
+
+    <label>Varış Şehri:</label>
+    <input type="text" name="ArrivalCity" required />
+
+    <label>Tarih:</label>
+    <input type="date" name="SelectedDate" required />
+
+    <button type="submit">Uçuşları Ara</button>
+</form>
+
+@model List<Schedule>
+
+@if (Model != null && Model.Any())
+{
+    <h2>Uçuşlar</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Nereden:</th>
+                <th>Nereye:</th>
+                <th>Kalkış Zamanı</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var flight in Model)
+            {
+                <tr>
+                    <td>@ViewBag.DepartureCity</td>
+                    <td>@ViewBag.ArrivalCity</td>
+                    <td>@flight.DepartureTime.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td> <button>Koltuk Seç</button></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
